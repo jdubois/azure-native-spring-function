@@ -12,5 +12,9 @@ jobs:
                 graalvm-version: '20.1.0.java8'
             - name: Test GraalVM installation
               run: java -version
+            - name: Install native-image
+              run: |
+                echo 
+                gu install native-image
             - name: Build native image
               run: ./build.sh
