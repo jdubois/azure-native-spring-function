@@ -1,0 +1,15 @@
+name: Build native image
+on: [push, pull_request]
+jobs:
+    build-native:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+            - name: Install GraalVM
+              uses: DeLaGuardo/setup-graalvm@3
+              with:
+                graalvm-version: '20.1.0.java8'
+            - name: Build native image
+              run: ./build.sh
+              
