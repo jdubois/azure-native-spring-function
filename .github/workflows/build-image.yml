@@ -10,6 +10,7 @@ jobs:
               uses: DeLaGuardo/setup-graalvm@3
               with:
                 graalvm-version: '20.1.0.java8'
+            - name: Test GraalVM installation
+              run: java -version
             - name: Build native image
               run: ./build.sh
-              
