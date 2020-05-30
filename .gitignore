@@ -145,3 +145,11 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
+
+######################
+# Terraform
+######################
+*.tfstate
+*.tfstate.backup
+*.tfstate.lock.info
+.terraform/
