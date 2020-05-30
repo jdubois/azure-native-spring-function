@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-ARTIFACT=azure-native-spring-function
+ARTIFACT=azure-native-spring-function-exec
 MAINCLASS=com.example.demo.DemoApplication
 VERSION=0.0.1-SNAPSHOT
 

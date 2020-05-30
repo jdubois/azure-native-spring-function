@@ -2,7 +2,7 @@
     "version": "2.0",
     "httpWorker": {
         "description": {
-            "defaultExecutablePath": "azure-native-spring-function"
+            "defaultExecutablePath": "azure-native-spring-function-exec"
         }
     }
 }

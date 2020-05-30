@@ -10,7 +10,7 @@
 		<relativePath/> 
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>azure-native-spring-function</artifactId>
+	<artifactId>azure-native-spring-function-exec</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>demo</name>
 	<description>Demo project for Spring Boot</description>
