@@ -1,7 +1,7 @@
-name: Build native image
+name: Build and deploy native image
 on: [push, pull_request]
 jobs:
-    build-native:
+    build-and-deploy:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code
@@ -18,3 +18,12 @@ jobs:
                 gu install native-image
             - name: Build native image
               run: ./build.sh
+            - name: Login to Azure
+              uses: azure/login@v1
+              with:
+                creds: ${{ secrets.AZURE_CREDENTIALS }}
+            - name: 'Run Azure Functions Action'
+              uses: Azure/functions-action@v1
+              with:
+                app-name: azure-native-spring-function
+                package: target/function
