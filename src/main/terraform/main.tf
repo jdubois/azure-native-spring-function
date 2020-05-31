@@ -20,8 +20,8 @@ resource "azurerm_app_service_plan" "main" {
   name                = "azure-native-spring-function-service-plan"
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
-  kind                = "FunctionApp"
-
+  kind                = "Linux"
+  reserved            = true
   sku {
     tier = "Dynamic"
     size = "Y1"
