@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-RESPONSE=`curl -s localhost:8080/ -d world -H "Content-Type: text/plain"`
+RESPONSE=`curl -s localhost:1337/ -d world -H "Content-Type: text/plain"`
 if [[ "$RESPONSE" == 'Hello, world!' ]]; then
   exit 0
 else
