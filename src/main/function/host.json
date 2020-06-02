@@ -2,7 +2,8 @@
     "version": "2.0",
     "httpWorker": {
         "description": {
-            "defaultExecutablePath": "/home/site/wwwroot/azure-native-spring-function-exec"
+            "defaultExecutablePath": "/home/site/wwwroot/azure-native-spring-function-exec",
+            "arguments": [ "--server.port=$FUNCTIONS_HTTPWORKER_PORT" ]
         }
     }
 }
