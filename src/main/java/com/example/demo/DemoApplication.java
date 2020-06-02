@@ -9,13 +9,12 @@ import java.util.Collections;
 public class DemoApplication {
 
 	public static void main(String[] args) {
-		String functionServerPort = System.getenv("FUNCTIONS_HTTPWORKER_PORT");
-		if (functionServerPort == null) {
-			functionServerPort = "1337";
-		}
 		SpringApplication app = new SpringApplication(DemoApplication.class);
-		app.setDefaultProperties(Collections
-				.singletonMap("server.port", functionServerPort));
+/*		String functionServerPort = System.getenv("FUNCTIONS_HTTPWORKER_PORT");
+		if (functionServerPort != null) {
+			app.setDefaultProperties(Collections
+					.singletonMap("server.port", functionServerPort));
+		}*/
 		app.run(args);
 	}
 
