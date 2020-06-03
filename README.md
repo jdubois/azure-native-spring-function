@@ -5,13 +5,15 @@ This sample application shows how to:
 - Compile a Spring Boot application using GraalVM
 - Deploy and run that application on [Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/?WT.mc_id=github-social-judubois)
 
+This will use GitHub Actions to do all the heavy work: as we are creating a native image, it needs to be built on a Linux machine with GraalVM installed.
+
 ## Prerequisites
 
 - An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/en-us/free/?WT.mc_id=github-social-judubois).
 - The Azure CLI must be installed. [Install the Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli/?WT.mc_id=github-social-judubois).
 - Terraform must be installed. [Install Terraform](https://www.terraform.io/).
 
-To check if Azure is correctly set up, login using the CLI, by running `az login`.
+To check if Azure is correctly set up, login using the CLI by running `az login`.
 
 ## Fork this repository
 
@@ -47,7 +49,7 @@ Go to the `src/main/terraform` directory and run:
 This will create the following Azure resources:
 
 - A resource group that will store all resources (just delete this resource group to remove everything)
-- An Azure Functions plan. This is a consumption plan, running on Linux: you will only be paid for your usage, with a generous free tier.
+- An Azure Functions plan. This is a consumption plan, running on Linux: you will only be billed for your usage, with a generous free tier.
 [Here is the full pricing documentation](https://azure.microsoft.com/en-us/pricing/details/functions/?WT.mc_id=github-social-judubois).
 - An Azure Functions application, that will use the plan described in the point above.
 - An Azure Storage account, which will be used to store your function's data (the binary and the configuration files).
@@ -69,14 +71,14 @@ Create a new secret called `AZ_FUNCTION_NAME_APP`, paste the value in it, and cl
 
 The `AZURE_CREDENTIALS` will allow the GitHub Actions workflow to log in your Azure account, and deploy the application.
 
-This is a JSON payload that will get by executing the following command.
-
-- Replace `<SUBSCRIPTION_ID>` by your Azure subscription ID. To get this ID, you can run `az account show` and copy the value of the `id` attribute.
-- This command uses 2 environment variables set we set up earlier for Terraform, the name of your Azure Functions application and the name of your resource group.
+This is a JSON payload that we will get by executing the following command:
 
 ```bash
 az ad sp create-for-rbac --name http://$TF_VAR_AZ_FUNCTION_NAME_APP --role contributor --scopes /subscriptions/<SUBSCRIPTION_ID>/resourceGroups/$TF_VAR_AZ_RESOURCE_GROUP --sdk-auth
 ```
+
+- Replace `<SUBSCRIPTION_ID>` by your Azure subscription ID. To get this ID, you can run `az account show` and copy the value of the `id` attribute.
+- This command uses 2 environment variables set we set up earlier for Terraform, the name of your Azure Functions application and the name of your resource group.
 
 Create a new secret called `AZURE_CREDENTIALS`, paste the JSON payload in it, and click "Add secret".
 
@@ -92,4 +94,4 @@ git commit -m "force build" --allow-empty && git push
 
 You will be able to monitor that process in the "Actions" tab of your fork of the project.
 
-Once the function is deployed, you can access it though the [Azure Portal](https://portal.azure.com/?WT.mc_id=github-social-judubois)
+Once the function is deployed, you can access it though the [Azure Portal](https://portal.azure.com/?WT.mc_id=github-social-judubois). You will there be able to monitor it and test it.
