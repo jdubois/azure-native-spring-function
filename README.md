@@ -108,13 +108,15 @@ As you will want to test the performance of this function, still on the "Code + 
 time curl <YOUR-FUNCTION-URL> -d world -H "Content-Type: text/plain"
 ```
 
-For monitoring your function, you can also select the "Monitor" tab and create an Azure Applications Insight instance, which you will be able to give you detailed metrics (like RAM usage) of your function.
+For monitoring your function, you can also select the "Monitor" tab and create an Azure Applications Insight instance, which will be able to give you detailed metrics (like RAM usage) of your function.
 
 ## Tuning the function
 
 The function configuration is in `src/main/function`:
 
 - The name of the directory should be the same as the name of the function. That's how Azure Functions can apply the configuration.
-- Documentation for the `host.json` and `function.json` files can be found at [Azure Functions custom handlers](https://docs.microsoft.com/en-us/azure/azure-functions/functions-custom-handlers/?WT.mc_id=github-social-judubois)
+- Documentation for the `host.json` and `function.json` files can be found at [Azure Functions custom handlers](https://docs.microsoft.com/en-us/azure/azure-functions/functions-custom-handlers/?WT.mc_id=github-social-judubois).
 
+The application used here is very simple, and comes from [https://github.com/spring-projects-experimental/spring-graalvm-native/tree/master/spring-graalvm-native-samples/function-netty](https://github.com/spring-projects-experimental/spring-graalvm-native/tree/master/spring-graalvm-native-samples/function-netty).
 
+If you want to work on this function or run it locally, the [https://github.com/spring-projects-experimental/spring-graalvm-native](https://github.com/spring-projects-experimental/spring-graalvm-native) project gives all the necessary documentation.
