@@ -13,6 +13,11 @@ This sample application shows how to:
 
 To check if Azure is correctly set up, login using the CLI, by running `az login`.
 
+## Fork this repository
+
+All compilation and deployment will be done using GitHub Actions, so you need your own repository for this.
+The easiest way is to fork this repository to your own GitHub account, using the `fork` button on the top right-hand corner of this page.
+
 ## Configure environment variables
 
 You need to configure the following environment variables:
@@ -58,7 +63,9 @@ This will create the following Azure resources:
 - An Azure Functions application, that will use the plan described in the point above.
 - An Azure Storage account, which will be used to store your function's data (the binary and the configuration files).
 
-## Configure Azure Credentials
+## Configure GitHub Actions to build and deploy the application
+
+The GitHub Actions workflow that we will use is available in [.github/workflows/build-and-deploy.yml](.github/workflows/build-and-deploy.yml).
 
 ```bash
 az ad sp create-for-rbac --name http://azure-native-spring-function --role contributor --scopes /subscriptions/10494bac-4dc9-4f66-9563-996f688d9c6c/resourceGroups/azure-native-spring-function --sdk-auth
