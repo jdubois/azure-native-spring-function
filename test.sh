@@ -19,10 +19,10 @@ if ! [ -z "$1" ]; then
 		EXECUTABLE=${1}
 		shift 1
 	else
-		EXECUTABLE=target/function/${PWD##*/}-exec
+		EXECUTABLE=target/function/${PWD##*/}
 	fi
 else
-	EXECUTABLE=${1:-target/function/${PWD##*/}}-exec
+	EXECUTABLE=${1:-target/function/${PWD##*/}}
 fi
 
 if [ -z "$1" ] || [[ "$1" == "--"* ]]; then

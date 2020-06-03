@@ -80,3 +80,16 @@ az ad sp create-for-rbac --name http://$TF_VAR_AZ_FUNCTION_NAME_APP --role contr
 
 Create a new secret called `AZURE_CREDENTIALS`, paste the JSON payload in it, and click "Add secret".
 
+## Deploy and test
+
+Now that everything is set up, your application will be automatically built as a GraalVM native image, and deployed to Azure Functions.
+
+You can change some code, or force a commit to trigger such a build:
+
+```bash
+git commit -m "force build" --allow-empty && git push
+```
+
+You will be able to monitor that process in the "Actions" tab of your fork of the project.
+
+Once the function is deployed, you can access it though the [Azure Portal](https://portal.azure.com/?WT.mc_id=github-social-judubois)
