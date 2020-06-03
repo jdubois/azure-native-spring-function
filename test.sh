@@ -22,7 +22,7 @@ if ! [ -z "$1" ]; then
 		EXECUTABLE=target/function/spring-native-image
 	fi
 else
-	EXECUTABLE=${1:-target/function/spring-native-image
+	EXECUTABLE=target/function/spring-native-image
 fi
 
 if [ -z "$1" ] || [[ "$1" == "--"* ]]; then
