@@ -4,12 +4,12 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "main" {
-  name     = "azure-native-spring-function"
-  location = "westeurope"
+  name     = var.AZ_RESOURCE_GROUP
+  location = var.AZ_LOCATION
 }
 
 resource "azurerm_storage_account" "main" {
-  name                     = "nativespringfunction"
+  name                     = var.AZ_STORAGE_NAME
   resource_group_name      = azurerm_resource_group.main.name
   location                 = azurerm_resource_group.main.location
   account_tier             = "Standard"
@@ -17,7 +17,7 @@ resource "azurerm_storage_account" "main" {
 }
 
 resource "azurerm_app_service_plan" "main" {
-  name                = "azure-native-spring-function-service-plan"
+  name                = "${var.AZ_FUNCTION_NAME_APP}-plan"
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
   kind                = "Linux"
@@ -29,7 +29,7 @@ resource "azurerm_app_service_plan" "main" {
 }
 
 resource "azurerm_function_app" "main" {
-  name                       = "azure-native-spring-function"
+  name                       = var.AZ_FUNCTION_NAME_APP
   location                   = azurerm_resource_group.main.location
   resource_group_name        = azurerm_resource_group.main.name
   app_service_plan_id        = azurerm_app_service_plan.main.id

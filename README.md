@@ -8,6 +8,10 @@ This sample application shows how to:
 ## Prerequisites
 
 - An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/en-us/free/?WT.mc_id=github-social-judubois).
+- The Azure CLI must be installed. [Install the Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli/?WT.mc_id=github-social-judubois).
+- Terraform must be installed. [Install Terraform](https://www.terraform.io/).
+
+To check if Azure is correctly set up, login using the CLI, by running `az login`.
 
 ## Configure environment variables
 
@@ -27,8 +31,32 @@ AZ_STORAGE_NAME=<your-unique-name>
 
 In order not to type those values again, you can store them in a `.env` file at the root of this project:
 
-- This `.env` file will be ignored by Git (so it will remain on your local machine and won't be shared)
-- You will be able to set those environment variables by running `source .env`
+- This `.env` file will be ignored by Git (so it will remain on your local machine and won't be shared).
+- You will be able to set those environment variables by running `source .env`.
+
+## Create the cloud infrastructure using Terraform
+
+Pass the environment variables we created earlier to Terraform:
+
+```bash
+export TF_VAR_AZ_LOCATION=${AZ_LOCATION}
+export TF_VAR_AZ_RESOURCE_GROUP=${AZ_RESOURCE_GROUP}
+export TF_VAR_AZ_FUNCTION_NAME_APP=${AZ_FUNCTION_NAME_APP}
+export TF_VAR_AZ_STORAGE_NAME=${AZ_STORAGE_NAME}
+```
+
+Go to the `src/main/terraform` directory and run:
+
+- `terraform init` to initialize your Terraform environment
+- `terraform apply --auto-approve` to create all the necessary Azure resources
+
+This will create the following Azure resources:
+
+- A resource group that will store all resources (just delete this resource group to remove everything)
+- An Azure Functions plan. This is a consumption plan, running on Linux: you will only be paid for your usage, with a generous free tier.
+[Here is the full pricing documentation](https://azure.microsoft.com/en-us/pricing/details/functions/?WT.mc_id=github-social-judubois).
+- An Azure Functions application, that will use the plan described in the point above.
+- An Azure Storage account, which will be used to store your function's data (the binary and the configuration files).
 
 ## Configure Azure Credentials
 
