@@ -32,7 +32,7 @@ AZ_STORAGE_NAME=<your-unique-name>
 In order not to type those values again, you can store them in a `.env` file at the root of this project:
 
 - This `.env` file will be ignored by Git (so it will remain on your local machine and won't be shared).
-- You will be able to set those environment variables by running `source .env`.
+- You will be able to configure those environment variables by running `source .env`.
 
 ## Create the cloud infrastructure using Terraform
 
