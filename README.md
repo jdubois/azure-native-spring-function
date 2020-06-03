@@ -67,6 +67,7 @@ This will create the following Azure resources:
 
 The GitHub Actions workflow that we will use is available in [.github/workflows/build-and-deploy.yml](.github/workflows/build-and-deploy.yml).
 
+For this GitHub Actions workflow to work, we need to configure
 ```bash
 az ad sp create-for-rbac --name http://azure-native-spring-function --role contributor --scopes /subscriptions/10494bac-4dc9-4f66-9563-996f688d9c6c/resourceGroups/azure-native-spring-function --sdk-auth
 ```
