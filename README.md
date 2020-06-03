@@ -56,7 +56,27 @@ This will create the following Azure resources:
 
 The GitHub Actions workflow that we will use is available in [.github/workflows/build-and-deploy.yml](.github/workflows/build-and-deploy.yml).
 
-For this GitHub Actions workflow to work, we need to configure
+This GitHub Action will need to use some variables, for this go to your project fork and select "Settings", then "Secrets".
+
+### Configure the AZ_FUNCTION_NAME_APP secret
+
+The `AZ_FUNCTION_NAME_APP` is the name of your function application. It is the same as the `TF_VAR_AZ_FUNCTION_NAME_APP`
+environment variable that we configured earlier with Terraform.
+
+Create a new secret called `AZ_FUNCTION_NAME_APP`, paste the value in it, and click "Add secret".
+
+### Configure the AZURE_CREDENTIALS secret
+
+The `AZURE_CREDENTIALS` will allow the GitHub Actions workflow to log in your Azure account, and deploy the application.
+
+This is a JSON payload that will get by executing the following command.
+
+- Replace `<SUBSCRIPTION_ID>` by your Azure subscription ID. To get this ID, you can run `az account show` and copy the value of the `id` attribute.
+- This command uses 2 environment variables set we set up earlier for Terraform, the name of your Azure Functions application and the name of your resource group.
+
 ```bash
-az ad sp create-for-rbac --name http://azure-native-spring-function --role contributor --scopes /subscriptions/10494bac-4dc9-4f66-9563-996f688d9c6c/resourceGroups/azure-native-spring-function --sdk-auth
+az ad sp create-for-rbac --name http://$TF_VAR_AZ_FUNCTION_NAME_APP --role contributor --scopes /subscriptions/<SUBSCRIPTION_ID>/resourceGroups/$TF_VAR_AZ_RESOURCE_GROUP --sdk-auth
 ```
+
+Create a new secret called `AZURE_CREDENTIALS`, paste the JSON payload in it, and click "Add secret".
+

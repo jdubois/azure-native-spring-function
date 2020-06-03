@@ -25,5 +25,5 @@ jobs:
             - name: 'Deploy to Azure Function'
               uses: Azure/functions-action@v1
               with:
-                app-name: azure-native-spring-function
+                app-name: ${{ secrets.AZ_FUNCTION_NAME_APP }}
                 package: target/function
