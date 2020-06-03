@@ -24,10 +24,10 @@ AZ_FUNCTION_NAME_APP=<your-unique-name>
 AZ_STORAGE_NAME=<your-unique-name>
 ```
 
-- `AZ_LOCATION` ➡ The name of the Azure location to use. Use `az account list-locations` to list available locations. Common values are `eastus`, `westus`, `westeurope`.
-- `AZ_RESOURCE_GROUP` ➡ The resource group in which you will work. It should be unique in your subscription, so you can probably keep the default `azure-native-spring-function`.
-- `AZ_FUNCTION_NAME_APP` ➡ Functions will run into an application, and its name should be unique across Azure.
-- `AZ_STORAGE_NAME` ➡ Functions binaries and configuration will be stored inside a storage account. Its name should also be unique across Azure. It must be between 3 and 24 characters in length and may contain numbers and lowercase letters only.
+- `AZ_LOCATION` : The name of the Azure location to use. Use `az account list-locations` to list available locations. Common values are `eastus`, `westus`, `westeurope`.
+- `AZ_RESOURCE_GROUP` : The resource group in which you will work. It should be unique in your subscription, so you can probably keep the default `azure-native-spring-function`.
+- `AZ_FUNCTION_NAME_APP` : Functions will run into an application, and its name should be unique across Azure.
+- `AZ_STORAGE_NAME` : Functions binaries and configuration will be stored inside a storage account. Its name should also be unique across Azure. It must be between 3 and 24 characters in length and may contain numbers and lowercase letters only.
 
 In order not to type those values again, you can store them in a `.env` file at the root of this project:
 
