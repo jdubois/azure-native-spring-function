@@ -21,5 +21,6 @@
       "vscjava.vscode-maven",
       "vscjava.vscode-spring-boot-dashboard",
       "vscjava.vscode-spring-initializr"
-    ]
+    ],
+    "postCreateCommand": "/bin/bash ./.devcontainer/post-create.sh > ~/post-create.log"
   }
