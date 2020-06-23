@@ -15,6 +15,17 @@ This will use GitHub Actions to do all the heavy work: as we are creating a nati
 
 To check if Azure is correctly set up, login using the CLI by running `az login`.
 
+## [Optional] Visual Studio Codespaces support
+
+You can open this project directly using [Visual Studio Codespaces](https://visualstudio.microsoft.com/services/visual-studio-codespaces/?WT.mc_id=github-social-judubois).
+
+This uses the [jdubois-codespaces Docker image](https://github.com/jdubois/jdubois-codespaces) and will install GraalVM automatically in a post-installation script.
+
+Within this environment, you will be able to:
+
+- Build the application natively using GraalVM, by running `./build.sh`. The executable file will be in the `target/function` directory.
+- Build and run the application using the JVM, either by running it directly from Visual Studio Code, or by running `./mvnw spring-boot:run`.
+
 ## Fork this repository
 
 All compilation and deployment will be done using GitHub Actions, so you need your own repository for this.
