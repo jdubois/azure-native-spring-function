@@ -4,7 +4,7 @@
 mkdir /home/vsonline/graalvm
 cd /home/vsonline/graalvm
 
-export GRAALVM_VERSION=20.1.0
+export GRAALVM_VERSION=20.2.0
 wget -c https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-${GRAALVM_VERSION}/graalvm-ce-java11-linux-amd64-${GRAALVM_VERSION}.tar.gz -O - | tar -xz
 sudo mv graalvm-ce-java11-${GRAALVM_VERSION}/ /usr/lib/jvm/
 cd /usr/lib/jvm
