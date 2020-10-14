@@ -1,6 +1,6 @@
 variable "AZ_LOCATION" {
   description = "The Azure location where all resources in this example should be created"
-  default     = "westeurope"
+  default     = "westus"
 }
 
 variable "AZ_RESOURCE_GROUP" {
