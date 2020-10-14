@@ -15,9 +15,9 @@ This will use GitHub Actions to do all the heavy work: as we are creating a nati
 
 To check if Azure is correctly set up, login using the CLI by running `az login`.
 
-## [Optional] Visual Studio Codespaces support
+## [Optional] GitHub Codespaces support
 
-You can open this project directly using [Visual Studio Codespaces](https://visualstudio.microsoft.com/services/visual-studio-codespaces/?WT.mc_id=github-social-judubois).
+You can open this project directly using [GitHub Codespaces](https://github.com/features/codespaces).
 
 This uses the [jdubois-codespaces Docker image](https://github.com/jdubois/jdubois-codespaces) and will install GraalVM automatically in a post-installation script.
 
