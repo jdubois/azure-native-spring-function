@@ -3,14 +3,14 @@
 This sample application shows how to:
 
 - Compile a Spring Boot application using GraalVM
-- Deploy and run that application on [Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/?WT.mc_id=github-social-judubois)
+- Deploy and run that application on [Azure Functions](https://docs.microsoft.com/azure/azure-functions/?WT.mc_id=java-0000-judubois)
 
 This will use GitHub Actions to do all the heavy work: as we are creating a native image, it needs to be built on a Linux machine with GraalVM installed.
 
 ## Prerequisites
 
-- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/en-us/free/?WT.mc_id=github-social-judubois).
-- The Azure CLI must be installed. [Install the Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli/?WT.mc_id=github-social-judubois).
+- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=java-0000-judubois).
+- The Azure CLI must be installed. [Install the Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli/?WT.mc_id=java-0000-judubois).
 - Terraform must be installed. [Install Terraform](https://www.terraform.io/).
 
 To check if Azure is correctly set up, login using the CLI by running `az login`.
@@ -61,7 +61,7 @@ This will create the following Azure resources:
 
 - A resource group that will store all resources (just delete this resource group to remove everything)
 - An Azure Functions plan. This is a consumption plan, running on Linux: you will only be billed for your usage, with a generous free tier.
-[Here is the full pricing documentation](https://azure.microsoft.com/en-us/pricing/details/functions/?WT.mc_id=github-social-judubois).
+[Here is the full pricing documentation](https://azure.microsoft.com/pricing/details/functions/?WT.mc_id=java-0000-judubois).
 - An Azure Functions application, that will use the plan described in the point above.
 - An Azure Storage account, which will be used to store your function's data (the binary and the configuration files).
 
@@ -105,7 +105,7 @@ git commit -m "force build" --allow-empty && git push
 
 You will be able to monitor that process in the "Actions" tab of your fork of the project.
 
-Once the function is deployed, you can access it though the [Azure Portal](https://portal.azure.com/?WT.mc_id=github-social-judubois). You will there be able to monitor it and test it.
+Once the function is deployed, you can access it though the [Azure Portal](https://portal.azure.com/?WT.mc_id=java-0000-judubois). You will there be able to monitor it and test it.
 
 - Select your resource group
 - Select the Azure Functions application you created (its type is "App Service")
@@ -126,7 +126,7 @@ For monitoring your function, you can also select the "Monitor" tab and create a
 The function configuration is in `src/main/function`:
 
 - The name of the directory should be the same as the name of the function. That's how Azure Functions can apply the configuration.
-- Documentation for the `host.json` and `function.json` files can be found at [Azure Functions custom handlers](https://docs.microsoft.com/en-us/azure/azure-functions/functions-custom-handlers/?WT.mc_id=github-social-judubois).
+- Documentation for the `host.json` and `function.json` files can be found at [Azure Functions custom handlers](https://docs.microsoft.com/azure/azure-functions/functions-custom-handlers/?WT.mc_id=java-0000-judubois).
 
 The application used here is very simple, and comes from [https://github.com/spring-projects-experimental/spring-graalvm-native/tree/master/spring-graalvm-native-samples/function-netty](https://github.com/spring-projects-experimental/spring-graalvm-native/tree/master/spring-graalvm-native-samples/function-netty).
 
