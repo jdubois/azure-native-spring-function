@@ -7,7 +7,7 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v2
             - name: Install GraalVM
-              uses: DeLaGuardo/setup-graalvm@3
+              uses: DeLaGuardo/setup-graalvm@3.0
               with:
                 graalvm-version: '20.3.0.java11'
             - name: Test GraalVM installation
