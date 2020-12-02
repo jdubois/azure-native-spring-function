@@ -23,7 +23,7 @@ jobs:
               with:
                 creds: ${{ secrets.AZURE_CREDENTIALS }}
             - name: 'Deploy to Azure Function'
-              uses: Azure/functions-action@v1.1.5
+              uses: Azure/functions-action@v1.1.8
               with:
                 app-name: ${{ secrets.AZ_FUNCTION_NAME_APP }}
                 package: target/function
