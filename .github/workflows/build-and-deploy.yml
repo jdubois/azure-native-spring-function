@@ -1,5 +1,5 @@
 name: Build and deploy native image
-on: [push, pull_request]
+on: [push]
 jobs:
     build-and-deploy:
         runs-on: ubuntu-latest
