@@ -2,7 +2,7 @@ name: Build and deploy native image
 on: [push]
 jobs:
     build-and-deploy:
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-20.04
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
