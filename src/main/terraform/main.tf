@@ -1,5 +1,5 @@
 provider "azurerm" {
-  version = "~> 2.1"
+  version = "=2.39.0"
   features {}
 }
 
@@ -20,7 +20,7 @@ resource "azurerm_app_service_plan" "main" {
   name                = "${var.AZ_FUNCTION_NAME_APP}-plan"
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
-  kind                = "Linux"
+  kind                = "FunctionApp"
   reserved            = true
   sku {
     tier = "Dynamic"
@@ -35,5 +35,10 @@ resource "azurerm_function_app" "main" {
   app_service_plan_id        = azurerm_app_service_plan.main.id
   storage_account_name       = azurerm_storage_account.main.name
   storage_account_access_key = azurerm_storage_account.main.primary_access_key
-  version = "~3"
+  version                    = "~3"
+  os_type                    = "linux"
+  auth_settings {
+    enabled = false
+    unauthenticated_client_action = "AllowAnonymous"
+  }
 }
