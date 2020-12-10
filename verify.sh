@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 RESPONSE=`curl -s localhost:8080/ -d world -H "Content-Type: text/plain"`
-if [[ "$RESPONSE" == 'Hello, world!' ]]; then
+if [[ "$RESPONSE" == 'Hello with UPX, world!' ]]; then
   exit 0
 else
   exit 1
