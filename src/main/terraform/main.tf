@@ -37,8 +37,12 @@ resource "azurerm_function_app" "main" {
   storage_account_access_key = azurerm_storage_account.main.primary_access_key
   version                    = "~3"
   os_type                    = "linux"
+  https_only                 = "true"
   auth_settings {
     enabled = false
     unauthenticated_client_action = "AllowAnonymous"
+  }
+  site_config {
+    ftps_state = "FtpsOnly"
   }
 }
