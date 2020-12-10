@@ -26,4 +26,4 @@ jobs:
               uses: Azure/functions-action@v1.1.8
               with:
                 app-name: ${{ secrets.AZ_FUNCTION_NAME_APP }}
-                package: target/function
+                package: target/native_spring_function.zip

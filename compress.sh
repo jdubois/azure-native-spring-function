@@ -16,3 +16,6 @@ tar -xvf upx-$UPX_VERSION-amd64_linux.tar.xz
 
 echo "Compressing $ARTIFACT with UPX"
 ./upx-$UPX_VERSION-amd64_linux/upx --best target/function/spring-native-image
+
+echo "Compressing the folder with ZIP"
+zip -r -0 target/native_spring_function.zip target/function
