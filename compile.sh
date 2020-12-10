@@ -30,6 +30,7 @@ echo "Compiling $ARTIFACT with $GRAALVM_VERSION"
   --verbose \
   --no-server \
   --no-fallback \
+  --best \
   -H:Name=$ARTIFACT \
   -H:+ReportExceptionStackTraces \
   -Dspring.native.remove-unused-autoconfig=true \
