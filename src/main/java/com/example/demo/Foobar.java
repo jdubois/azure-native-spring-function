@@ -9,6 +9,6 @@ public class Foobar implements Function<String, String> {
 
     @Override
     public String apply(String input) {
-        return "Hello with ZIP, " + input + "!\n";
+        return "Hello with ZIP 2, " + input + "!\n";
     }
 }
