@@ -74,11 +74,10 @@ The `AZURE_CREDENTIALS` will allow the GitHub Actions workflow to log in your Az
 This is a JSON payload that we will get by executing the following command:
 
 ```bash
-az ad sp create-for-rbac --name http://$TF_VAR_AZ_FUNCTION_NAME_APP --role contributor --scopes /subscriptions/<SUBSCRIPTION_ID>/resourceGroups/$TF_VAR_AZ_RESOURCE_GROUP --sdk-auth
+RESOURCE_ID=$(az group show --name $TF_VAR_AZ_RESOURCE_GROUP --query id -o tsv)
+SPNAME="sp-$(az functionapp list --resource-group $TF_VAR_AZ_RESOURCE_GROUP  --query '[].name' -o tsv)"
+az ad sp create-for-rbac --name "${SPNAME}" --role contributor --scopes "$RESOURCE_ID" --sdk-auth
 ```
-
-- Replace `<SUBSCRIPTION_ID>` by your Azure subscription ID. To get this ID, you can run `az account show` and copy the value of the `id` attribute.
-- This command uses 2 environment variables set we set up earlier for Terraform, the name of your Azure Functions application and the name of your resource group.
 
 Create a new secret called `AZURE_CREDENTIALS`, paste the JSON payload in it, and click "Add secret".
 
