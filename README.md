@@ -41,7 +41,7 @@ In order not to type those values again, you can store them in a `.env` file at 
 - This `.env` file will be ignored by Git (so it will remain on your local machine and won't be shared).
 - You will be able to configure those environment variables by running `source .env`.
 
-Go to the `src/main/terraform` directory and run:
+Go to the `terraform` directory and run:
 
 - `terraform init` to initialize your Terraform environment
 - `terraform apply --auto-approve` to create all the necessary Azure resources
