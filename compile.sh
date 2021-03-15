@@ -11,7 +11,7 @@ rm -rf target
 mkdir -p target/native-image
 
 echo "Building native image $ARTIFACT with Maven"
-./mvnw -Pnative-image package > target/native-image/output.txt
+./mvnw -Pnative-image package
 
 if [[ -f $ARTIFACT ]]
 then
@@ -19,7 +19,6 @@ then
   mv target/com.example.demoapplication target/function/spring-native-image
   exit 0
 else
-  cat output.txt
   printf "${RED}FAILURE${NC}: an error occurred when compiling the native-image.\n"
   exit 1
 fi
