@@ -1,7 +1,7 @@
-package com.example.demo;
+package com.example;
 
-import com.example.demo.model.Greeting;
-import com.example.demo.model.User;
+import com.example.model.Greeting;
+import com.example.model.User;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 

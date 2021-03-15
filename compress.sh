@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ARTIFACT=spring-native-image
-MAINCLASS=com.example.demo.DemoApplication
+MAINCLASS=com.example.DemoApplication
 VERSION=0.0.1-SNAPSHOT
 UPX_VERSION=3.96
 UPX=https://github.com/upx/upx/releases/download/v3.96/upx-3.96-amd64_linux.tar.xz
