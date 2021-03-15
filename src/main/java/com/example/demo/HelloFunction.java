@@ -1,17 +1,16 @@
 package com.example.demo;
 
+import com.example.demo.model.Greeting;
+import com.example.demo.model.User;
+import org.springframework.stereotype.Component;
+import reactor.core.publisher.Mono;
+
 import java.util.function.Function;
 
-import org.springframework.stereotype.Component;
-
 @Component
-public class HelloFunction implements Function<String, String> {
+public class HelloFunction implements Function<Mono<User>, Mono<Greeting>> {
 
-    @Override
-    public String apply(String user) {
-        if (user == null || "".equals(user)) {
-            user = "world";
-        }
-        return "Hello from GraalVM, " + user + "!\n";
+    public Mono<Greeting> apply(Mono<User> mono) {
+        return mono.map(user -> new Greeting("Hello, " + user.getName() + "!\n"));
     }
 }
