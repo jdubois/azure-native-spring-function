@@ -104,7 +104,7 @@ Once the function is deployed, you can access it though the [Azure Portal](https
 As you will want to test the performance of this function, still on the "Code + Test" screen, select "Get function URL". Use that function URL to test the performance of your function:
 
 ```bash
-time curl <YOUR-FUNCTION-URL> -d world -H "Content-Type: text/plain"
+time curl <YOUR-FUNCTION-URL> -d '{"name": "Azure"}'"
 ```
 
 For monitoring your function, you can also select the "Monitor" tab and create an Azure Applications Insight instance, which will be able to give you detailed metrics (like RAM usage) of your function.
