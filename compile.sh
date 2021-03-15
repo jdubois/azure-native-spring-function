@@ -13,7 +13,7 @@ mkdir -p target/native-image
 echo "Building native image $ARTIFACT with Maven"
 ./mvnw -Pnative-image package
 
-if [[ -f $ARTIFACT ]]
+if [[ -f "target/com.example.demoapplication" ]]
 then
   printf "${GREEN}SUCCESS${NC}\n"
   mv target/com.example.demoapplication target/function/spring-native-image
