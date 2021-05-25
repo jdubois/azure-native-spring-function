@@ -13,7 +13,7 @@ jobs:
             - name: Install GraalVM
               uses: DeLaGuardo/setup-graalvm@3.0
               with:
-                graalvm-version: '21.0.0.java11'
+                graalvm-version: '21.1.0.java11'
             - name: Cache local Maven repository
               uses: actions/cache@v2
               with:
@@ -25,7 +25,7 @@ jobs:
               run: java -version
             - name: Install native-image
               run: |
-                echo 
+                echo
                 gu install native-image
             - name: Build native image
               run: ./build.sh
@@ -34,7 +34,7 @@ jobs:
               with:
                 creds: ${{ secrets.AZURE_CREDENTIALS }}
             - name: 'Deploy to Azure Function'
-              uses: Azure/functions-action@v1.1.8
+              uses: Azure/functions-action@v1.4.0
               with:
                 app-name: ${{ secrets.AZ_FUNCTION_NAME_APP }}
                 package: target/native_spring_function.zip
