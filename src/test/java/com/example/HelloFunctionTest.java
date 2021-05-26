@@ -12,6 +12,6 @@ public class HelloFunctionTest {
     @Test
     public void test() {
         Mono<Greeting> result = new HelloFunction().apply(Mono.just(new User("foo")));
-        assertThat(result.block().getMessage()).isEqualTo("Hello from Spring Boot 2.5.0, foo!\n");
+        assertThat(result.block().getMessage()).isEqualTo("Hello, foo!\n");
     }
 }
