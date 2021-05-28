@@ -9,7 +9,7 @@ import java.util.Collections;
 @SpringBootApplication
 public class DemoApplication {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         SpringApplication app = new SpringApplication(DemoApplication.class);
         String functionServerPort = System.getenv("FUNCTIONS_HTTPWORKER_PORT");
         if (functionServerPort != null) {

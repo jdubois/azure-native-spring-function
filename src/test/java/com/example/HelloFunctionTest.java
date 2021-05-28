@@ -7,11 +7,11 @@ import reactor.core.publisher.Mono;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class HelloTest {
+public class HelloFunctionTest {
 
     @Test
     public void test() {
-        Mono<Greeting> result = new Hello().apply(Mono.just(new User("foo")));
-        assertThat(result.block().getMessage()).isEqualTo("Hello from GraalVM, foo!\n");
+        Mono<Greeting> result = new HelloFunction().apply(Mono.just(new User("foo")));
+        assertThat(result.block().getMessage()).isEqualTo("Hello 1, foo!\n");
     }
 }
