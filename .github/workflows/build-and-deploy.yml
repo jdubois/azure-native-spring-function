@@ -6,27 +6,16 @@ on:
       - dev
 jobs:
     build-and-deploy:
-        runs-on: ubuntu-20.04
+        runs-on: ubuntu-latest
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
-            - name: Install GraalVM
-              uses: DeLaGuardo/setup-graalvm@5.0
+            - uses: graalvm/setup-graalvm@v1
               with:
-                graalvm-version: '21.3.0.java11'
-            - name: Cache local Maven repository
-              uses: actions/cache@v2
-              with:
-                path: ~/.m2/repository
-                key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-                restore-keys: |
-                  ${{ runner.os }}-maven-
-            - name: Test GraalVM installation
-              run: java -version
-            - name: Install native-image
-              run: |
-                echo
-                gu install native-image
+                version: '22.0.0.2'
+                java-version: '17'
+                components: 'native-image'
+                github-token: ${{ secrets.GITHUB_TOKEN }}
             - name: Build native image
               run: ./build.sh
             - name: Login to Azure
