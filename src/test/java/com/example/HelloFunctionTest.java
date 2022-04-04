@@ -11,7 +11,7 @@ public class HelloFunctionTest {
 
     @Test
     public void test() {
-        Mono<Greeting> result = new HelloFunction().apply(Mono.just(new User("foo")));
+        Mono<Greeting> result = new HelloFunction().apply(Mono.just("foo"));
         assertThat(result.block().getMessage()).isEqualTo("Hello, foo!\n");
     }
 }
