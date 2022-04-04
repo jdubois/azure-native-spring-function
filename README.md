@@ -99,12 +99,12 @@ Once the function is deployed, you can access it though the [Azure Portal](https
 - Select the Azure Functions application you created (its type is "App Service")
 - In "Functions", find the function that you have just deployed
 - Select "Code + Test"
-- You can click on "Test/Run": select a "POST" method, and enter `{"name": "Azure"}` as body. You should have the following output: `{"message": "Hello, Azure!\n"}`
+- You can click on "Test/Run": select a "POST" method, and enter `Azure` as body. You should have the following output: `{"message": "Hello, Azure!\n"}`
 
 As you will want to test the performance of this function, still on the "Code + Test" screen, select "Get function URL". Use that function URL to test the performance of your function:
 
 ```bash
-time curl <YOUR-FUNCTION-URL> -d '{"name": "Azure"}' -H "Content-Type: application/json"
+time curl <YOUR-FUNCTION-URL> -d 'Azure' -H "Content-Type: application/json"
 ```
 
 For monitoring your function, you can also select the "Monitor" tab and create an Azure Applications Insight instance, which will be able to give you detailed metrics (like RAM usage) of your function.
