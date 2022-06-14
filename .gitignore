@@ -122,3 +122,4 @@ Desktop.ini
 *.tfstate.lock.info
 .terraform/
 /terraform/.terraform.lock.hcl
+/terraform/terraform.tfvars
