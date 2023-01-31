@@ -2,28 +2,55 @@ name: Build and deploy native image
 on:
   push:
     branches:
-      - master
-      - dev
+      - spring-boot-3
+env:
+  # Replace with your registry URL
+  REGISTRY_URL: crjuduboisnative.azurecr.io
+  RESOURCE_GROUP: tmp-judubois-native
+  PROJECT: judubois-native
+  STORAGE_ACCOUNT: stjuduboisnative
+
 jobs:
-    build-and-deploy:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v2
-            - uses: graalvm/setup-graalvm@v1
-              with:
-                version: '22.1.0'
-                java-version: '17'
-                components: 'native-image'
-                github-token: ${{ secrets.GITHUB_TOKEN }}
-            - name: Build native image
-              run: ./build.sh
-            - name: Login to Azure
-              uses: azure/login@v1
-              with:
-                creds: ${{ secrets.AZURE_CREDENTIALS }}
-            - name: 'Deploy to Azure Function'
-              uses: Azure/functions-action@v1
-              with:
-                app-name: ${{ secrets.AZ_FUNCTION_NAME_APP }}
-                package: target/native_spring_function.zip
+  build-native:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - uses: graalvm/setup-graalvm@v1
+        with:
+          version: 'latest'
+          java-version: '19'
+          components: 'native-image'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Log in to container registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY_URL }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+      - name: Build Spring Boot Function with GraalVM
+        run: |
+          ./mvnw -Pnative package
+      - name: Build Azure Function native Docker image
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/springboot-app-native:${{ github.sha }}
+          file: ./src/main/docker/Dockerfile.native
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Deploy Docker image to Azure Container Apps
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            az functionapp update \
+              --name ${{ env.PROJECT }} \
+              --resource-group ${{ env.RESOURCE_GROUP }} \
+              --storage-account ${{ env.STORAGE_ACCOUNT }} \
+              --deployment-container-image-name ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/springboot-app-native:${{ github.sha }} \
+              --docker-registry-server-password ${{ secrets.REGISTRY_PASSWORD }} \
+              --docker-registry-server-user ${{ secrets.REGISTRY_USERNAME }} \
+              --query "properties.configuration.ingress.fqdn" \
+              --output tsv

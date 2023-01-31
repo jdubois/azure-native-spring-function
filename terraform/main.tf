@@ -2,7 +2,11 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "3.0.2"
+      version = "3.41.0"
+    }
+    azurecaf = {
+      source  = "aztfmod/azurecaf"
+      version = "1.2.22"
     }
   }
 }
@@ -50,4 +54,18 @@ resource "azurerm_linux_function_app" "main" {
   site_config {
     always_on = false
   }
+}
+
+resource "azurecaf_name" "container_registry" {
+  name          = var.AZ_FUNCTION_NAME_APP
+  resource_type = "azurerm_container_registry"
+}
+
+resource "azurerm_container_registry" "container-registry" {
+  location            = azurerm_resource_group.main.location
+  name                = azurecaf_name.container_registry.result
+  resource_group_name = azurerm_resource_group.main.name
+
+  admin_enabled       = true
+  sku                 = "Basic"
 }

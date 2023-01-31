@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.0</version>
+		<version>3.0.2</version>
 		<relativePath/>
 	</parent>
 	<groupId>com.example</groupId>
@@ -16,26 +16,16 @@
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
-		<java.version>17</java.version>
-		<spring-cloud.version>2021.0.3</spring-cloud.version>
-		<spring-native.version>0.12.0</spring-native.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>19</java.version>
+
+		<spring.cloud.function.dependencies>4.0.0</spring.cloud.function.dependencies>
 	</properties>
 
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.experimental</groupId>
-			<artifactId>spring-native</artifactId>
-			<version>${spring-native.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-function-webflux</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-indexer</artifactId>
-			<optional>true</optional>
 		</dependency>
 
 		<!-- Test -->
@@ -55,8 +45,8 @@
 		<dependencies>
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>${spring-cloud.version}</version>
+				<artifactId>spring-cloud-function-dependencies</artifactId>
+				<version>${spring.cloud.function.dependencies}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -69,138 +59,12 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<classifier>exec</classifier>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.springframework.experimental</groupId>
-				<artifactId>spring-aot-maven-plugin</artifactId>
-				<version>${spring-native.version}</version>
-				<executions>
-					<execution>
-						<id>test-generate</id>
-						<goals>
-							<goal>test-generate</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>generate</id>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>3.2.0</version>
-				<configuration>
-					<outputDirectory>target/function</outputDirectory>
-					<resources>
-						<resource>
-							<directory>src/main/function</directory>
-							<includes>
-								<include>**/*</include>
-							</includes>
-						</resource>
-					</resources>
+					<layers>
+						<enabled>true</enabled>
+					</layers>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-
-	<profiles>
-		<profile>
-			<id>native-image</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.graalvm.nativeimage</groupId>
-						<artifactId>native-image-maven-plugin</artifactId>
-						<version>21.2.0</version>
-						<configuration>
-							<!-- The native image build needs to know the entry point to your application -->
-							<mainClass>com.example.DemoApplication</mainClass>
-						</configuration>
-						<executions>
-							<execution>
-								<goals>
-									<goal>native-image</goal>
-								</goals>
-								<phase>package</phase>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>central</id>
-			<url>https://repo.maven.apache.org/maven2</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-		<pluginRepository>
-			<id>spring-release</id>
-			<name>Spring release</name>
-			<url>https://repo.spring.io/release</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-		<pluginRepository>
-			<id>spring-snapshot</id>
-			<name>Spring Snapshots</name>
-			<url>https://repo.spring.io/snapshot</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
-		<pluginRepository>
-			<id>spring-milestone</id>
-			<name>Spring Milestone</name>
-			<url>https://repo.spring.io/milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
-	<repositories>
-		<repository>
-			<id>central</id>
-			<url>https://repo.maven.apache.org/maven2</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>spring-release</id>
-			<name>Spring release</name>
-			<url>https://repo.spring.io/release</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>spring-snapshot</id>
-			<name>Spring Snapshots</name>
-			<url>https://repo.spring.io/snapshot</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>spring-milestone</id>
-			<name>Spring Milestone</name>
-			<url>https://repo.spring.io/milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
 
 </project>
