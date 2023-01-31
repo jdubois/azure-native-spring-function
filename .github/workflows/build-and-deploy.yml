@@ -37,6 +37,7 @@ jobs:
           push: true
           tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/springboot-app-native:${{ github.sha }}
           file: ./src/main/docker/Dockerfile.native
+          context: .
       - name: Azure Login
         uses: azure/login@v1
         with:
