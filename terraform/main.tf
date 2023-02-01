@@ -57,7 +57,7 @@ resource "azurerm_linux_function_app" "main" {
       docker {
         image_name        = "${var.AZ_FUNCTION_NAME_APP}/springboot-app-native"
         image_tag         = "latest"
-        registry_url      = azurerm_container_registry.container-registry.name
+        registry_url      = "${azurerm_container_registry.container-registry.name}.azurecr.io"
         registry_username = azurerm_container_registry.container-registry.admin_username
         registry_password = azurerm_container_registry.container-registry.admin_password
       }
