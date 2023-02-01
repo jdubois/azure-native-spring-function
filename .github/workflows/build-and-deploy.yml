@@ -40,7 +40,7 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - name: Deploy Docker image to Azure Container Apps
+      - name: Update Docker image in Azure Function
         uses: azure/CLI@v1
         with:
           inlineScript: |
