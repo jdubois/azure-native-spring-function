@@ -4,11 +4,9 @@ on:
     branches:
       - spring-boot-3
 env:
-  # Replace with your registry URL
   REGISTRY_URL: crjuduboisnative.azurecr.io
   RESOURCE_GROUP: tmp-judubois-native
-  PROJECT: judubois-native
-  STORAGE_ACCOUNT: stjuduboisnative
+  FUNCTION_NAME: judubois-native
 
 jobs:
   build-native:
@@ -35,7 +33,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/springboot-app-native:${{ github.sha }}
+          tags: ${{ env.REGISTRY_URL }}/${{ env.FUNCTION_NAME }}/springboot-app-native:latest
           file: ./src/main/docker/Dockerfile.native
           context: .
       - name: Azure Login
@@ -47,11 +45,5 @@ jobs:
         with:
           inlineScript: |
             az functionapp update \
-              --name ${{ env.PROJECT }} \
-              --resource-group ${{ env.RESOURCE_GROUP }} \
-              --storage-account ${{ env.STORAGE_ACCOUNT }} \
-              --deployment-container-image-name ${{ env.REGISTRY_URL }}/${{ env.PROJECT }}/springboot-app-native:${{ github.sha }} \
-              --docker-registry-server-password ${{ secrets.REGISTRY_PASSWORD }} \
-              --docker-registry-server-user ${{ secrets.REGISTRY_USERNAME }} \
-              --query "properties.configuration.ingress.fqdn" \
-              --output tsv
+              --name ${{ env.FUNCTION_NAME }} \
+              --resource-group ${{ env.RESOURCE_GROUP }} 

@@ -53,6 +53,15 @@ resource "azurerm_linux_function_app" "main" {
   }
   site_config {
     always_on = false
+    application_stack {
+      docker {
+        image_name        = "${var.AZ_FUNCTION_NAME_APP}/springboot-app-native"
+        image_tag         = "latest"
+        registry_url      = azurerm_container_registry.container-registry.name
+        registry_username = azurerm_container_registry.container-registry.admin_username
+        registry_password = azurerm_container_registry.container-registry.admin_password
+      }
+    }
   }
 }
 
@@ -65,7 +74,6 @@ resource "azurerm_container_registry" "container-registry" {
   location            = azurerm_resource_group.main.location
   name                = azurecaf_name.container_registry.result
   resource_group_name = azurerm_resource_group.main.name
-
   admin_enabled       = true
   sku                 = "Basic"
 }
