@@ -30,7 +30,7 @@ jobs:
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - name: Build Spring Boot Function with GraalVM
         run: |
-          ./mvnw -Pnative package
+          ./mvnw -Pnative native:compile
       - name: Build Azure Function native Docker image
         uses: docker/build-push-action@v4
         with:
