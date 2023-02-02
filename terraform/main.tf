@@ -63,6 +63,9 @@ resource "azurerm_linux_function_app" "main" {
       }
     }
   }
+  app_settings = {
+    WEBSITES_ENABLE_APP_SERVICE_STORAGE = false
+  }
 }
 
 resource "azurecaf_name" "container_registry" {
