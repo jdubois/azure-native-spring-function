@@ -4,8 +4,6 @@ on:
     branches:
       - spring-boot-3
 env:
-  REGISTRY_URL: crjuduboisnative.azurecr.io
-  RESOURCE_GROUP: tmp-judubois-native
   FUNCTION_NAME: judubois-native
 
 jobs:
@@ -20,28 +18,21 @@ jobs:
           java-version: '19'
           components: 'native-image'
           github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Log in to container registry
-        uses: docker/login-action@v2
-        with:
-          registry: ${{ env.REGISTRY_URL }}
-          username: ${{ secrets.REGISTRY_USERNAME }}
-          password: ${{ secrets.REGISTRY_PASSWORD }}
       - name: Build Spring Boot Function with GraalVM
         run: |
           ./mvnw -Pnative native:compile
-      - name: Build Azure Function native Docker image
-        uses: docker/build-push-action@v4
-        with:
-          push: true
-          tags: ${{ env.REGISTRY_URL }}/${{ env.FUNCTION_NAME }}/springboot-app-native:latest
-          file: ./src/main/docker/Dockerfile.native
-          context: .
+      - name: Create package
+        run: |
+          cp -r src/main/function target
+          cp target/spring-native-image target/function/spring-native-image
+          cd target/function
+          zip -r ../native_spring_function.zip .
       - name: Azure Login
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Deploy to Azure Function
-        uses: Azure/functions-container-action@v1
+        uses: Azure/functions-action@v1
         with:
-          app-name: ${{ env.FUNCTION_NAME }}
-          image: ${{ env.REGISTRY_URL }}/${{ env.FUNCTION_NAME }}/springboot-app-native:latest
+          app-name: ${{ secrets.AZ_FUNCTION_NAME_APP }}
+          package: target/native_spring_function.zip

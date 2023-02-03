@@ -4,10 +4,6 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "3.41.0"
     }
-    azurecaf = {
-      source  = "aztfmod/azurecaf"
-      version = "1.2.22"
-    }
   }
 }
 
@@ -53,30 +49,5 @@ resource "azurerm_linux_function_app" "main" {
   }
   site_config {
     always_on = false
-    application_stack {
-      docker {
-        image_name        = "${var.AZ_FUNCTION_NAME_APP}/springboot-app-native"
-        image_tag         = "latest"
-        registry_url      = "${azurerm_container_registry.container-registry.name}.azurecr.io"
-        registry_username = azurerm_container_registry.container-registry.admin_username
-        registry_password = azurerm_container_registry.container-registry.admin_password
-      }
-    }
   }
-  app_settings = {
-    WEBSITES_ENABLE_APP_SERVICE_STORAGE = false
-  }
-}
-
-resource "azurecaf_name" "container_registry" {
-  name          = var.AZ_FUNCTION_NAME_APP
-  resource_type = "azurerm_container_registry"
-}
-
-resource "azurerm_container_registry" "container-registry" {
-  location            = azurerm_resource_group.main.location
-  name                = azurecaf_name.container_registry.result
-  resource_group_name = azurerm_resource_group.main.name
-  admin_enabled       = true
-  sku                 = "Basic"
 }
